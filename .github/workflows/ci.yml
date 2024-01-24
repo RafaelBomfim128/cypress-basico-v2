@@ -1,5 +1,10 @@
 name: End-to-end tests 🧪
-on: [push]
+on: 
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
@@ -9,4 +14,14 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
+        uses: cypress-io/github-action@v2
+
+# Novo job para execução manual
+  cypress-run-manual:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run manually
         uses: cypress-io/github-action@v2
